@@ -27,6 +27,14 @@ def create_app():
         app.register_blueprint(routes.api_bp, url_prefix='/api')
         db.create_all()
 
+        # Ensure default admin exists
+        from models import Admin
+        from werkzeug.security import generate_password_hash
+        if not Admin.query.first():
+            admin = Admin(email='admin@nayepankh.org', password_hash=generate_password_hash('admin123'))
+            db.session.add(admin)
+            db.session.commit()
+
     return app
 
 if __name__ == '__main__':
