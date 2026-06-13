@@ -1,0 +1,33 @@
+# Node
+node_modules/
+dist/
+.env
+.env.local
+
+# Python
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env.bak/
+venv.bak/
+
+# Database
+backend/database.db
+*.sqlite3
+
+# Uploads (Keep the directory structure, but ignore files inside)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
