@@ -20,7 +20,8 @@ const AdminDashboard = () => {
 
   const fetchVolunteers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/admin/volunteers');
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await axios.get(`${API_URL}/api/admin/volunteers`);
       if (response.data.success) {
         setVolunteers(response.data.data);
       }
@@ -47,7 +48,8 @@ const AdminDashboard = () => {
     if (!selectedVolunteer) return;
     setIsUpdating(true);
     try {
-      const response = await axios.post(`http://localhost:5000/api/admin/volunteers/${selectedVolunteer.id}/respond`, {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await axios.post(`${API_URL}/api/admin/volunteers/${selectedVolunteer.id}/respond`, {
         status: updateStatus,
         admin_notes: adminNotes
       });

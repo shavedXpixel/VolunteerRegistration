@@ -27,13 +27,18 @@ def create_app():
         app.register_blueprint(routes.api_bp, url_prefix='/api')
         db.create_all()
 
-        # Ensure default admin exists
+        # Ensure default admin exists if configured via environment variables
         from models import Admin
         from werkzeug.security import generate_password_hash
-        if not Admin.query.first():
-            admin = Admin(email='admin@nayepankh.org', password_hash=generate_password_hash('admin123'))
-            db.session.add(admin)
-            db.session.commit()
+        admin_email = os.environ.get('ADMIN_EMAIL')
+        admin_pass = os.environ.get('ADMIN_PASSWORD')
+        
+        if admin_email and admin_pass:
+            if not Admin.query.filter_by(email=admin_email).first():
+                admin = Admin(email=admin_email, password_hash=generate_password_hash(admin_pass))
+                db.session.add(admin)
+                db.session.commit()
+
 
     return app
 
