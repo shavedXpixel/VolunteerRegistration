@@ -356,7 +356,7 @@ const Volunteers = () => {
                       <p className="text-sm text-gray-800"><span className="font-semibold">Source:</span> {selectedVolunteer.source || 'N/A'}</p>
                       {selectedVolunteer.document_path && (
                         <p className="text-sm text-blue-600 font-bold mt-2">
-                          <a href={`http://localhost:5000/${selectedVolunteer.document_path}`} target="_blank" rel="noreferrer">
+                          <a href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/${selectedVolunteer.document_path}`} target="_blank" rel="noreferrer">
                             View Uploaded Document
                           </a>
                         </p>
